@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SSAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblEmployeeTeams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceLineFunctionID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DMLType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RecordInsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DMLType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RecordInsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServiceLineFunction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DMLType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RecordInsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeTeamID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DMLType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RecordInsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_ServiceLineFunction">
+          <End Role="ServiceLineFunction" Type="Self.ServiceLineFunction" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceLineFunction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ServiceLineFunctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="TeamRoles" Type="Self.TeamRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamRoles_tblEmployeeTeams">
+          <End Role="TblEmployeeTeams" Type="Self.TblEmployeeTeams" Multiplicity="1" />
+          <End Role="TeamRoles" Type="Self.TeamRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployeeTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamRoles">
+              <PropertyRef Name="EmployeeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SSAMModelStoreContainer">
+          <EntitySet Name="TblEmployeeTeams" EntityType="Self.TblEmployeeTeams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="TT" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="TT" store:Type="Tables" />
+          <EntitySet Name="ServiceLineFunction" EntityType="Self.ServiceLineFunction" Schema="TT" store:Type="Tables" />
+          <EntitySet Name="TeamRoles" EntityType="Self.TeamRoles" Schema="TT" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_ServiceLineFunction" Association="Self.FK_Activity_ServiceLineFunction">
+            <End Role="ServiceLineFunction" EntitySet="ServiceLineFunction" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamRoles_Roles" Association="Self.FK_TeamRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="TeamRoles" EntitySet="TeamRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamRoles_tblEmployeeTeams" Association="Self.FK_TeamRoles_tblEmployeeTeams">
+            <End Role="TblEmployeeTeams" EntitySet="TblEmployeeTeams" />
+            <End Role="TeamRoles" EntitySet="TeamRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SSAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SSAMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblEmployeeTeams" EntityType="SSAMModel.TblEmployeeTeam" />
+          <EntitySet Name="Activities" EntityType="SSAMModel.Activity" />
+          <EntitySet Name="Roles" EntityType="SSAMModel.Role" />
+          <EntitySet Name="ServiceLineFunctions" EntityType="SSAMModel.ServiceLineFunction" />
+          <EntitySet Name="TeamRoles" EntityType="SSAMModel.TeamRole" />
+          <AssociationSet Name="FK_TeamRoles_tblEmployeeTeams" Association="SSAMModel.FK_TeamRoles_tblEmployeeTeams">
+            <End Role="TblEmployeeTeam" EntitySet="TblEmployeeTeams" />
+            <End Role="TeamRole" EntitySet="TeamRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_ServiceLineFunction" Association="SSAMModel.FK_Activity_ServiceLineFunction">
+            <End Role="ServiceLineFunction" EntitySet="ServiceLineFunctions" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamRoles_Roles" Association="SSAMModel.FK_TeamRoles_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="TeamRole" EntitySet="TeamRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TblEmployeeTeam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TeamRoles" Relationship="SSAMModel.FK_TeamRoles_tblEmployeeTeams" FromRole="TblEmployeeTeam" ToRole="TeamRole" />
+        </EntityType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceLineFunctionID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DMLType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RecordInsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ServiceLineFunction" Relationship="SSAMModel.FK_Activity_ServiceLineFunction" FromRole="Activity" ToRole="ServiceLineFunction" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DMLType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RecordInsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TeamRoles" Relationship="SSAMModel.FK_TeamRoles_Roles" FromRole="Role" ToRole="TeamRole" />
+        </EntityType>
+        <EntityType Name="ServiceLineFunction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DMLType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RecordInsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="SSAMModel.FK_Activity_ServiceLineFunction" FromRole="ServiceLineFunction" ToRole="Activity" />
+        </EntityType>
+        <EntityType Name="TeamRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeTeamID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DMLType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RecordInsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblEmployeeTeam" Relationship="SSAMModel.FK_TeamRoles_tblEmployeeTeams" FromRole="TeamRole" ToRole="TblEmployeeTeam" />
+          <NavigationProperty Name="Role" Relationship="SSAMModel.FK_TeamRoles_Roles" FromRole="TeamRole" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_TeamRoles_tblEmployeeTeams">
+          <End Type="SSAMModel.TblEmployeeTeam" Role="TblEmployeeTeam" Multiplicity="1" />
+          <End Type="SSAMModel.TeamRole" Role="TeamRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployeeTeam">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamRole">
+              <PropertyRef Name="EmployeeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_ServiceLineFunction">
+          <End Type="SSAMModel.ServiceLineFunction" Role="ServiceLineFunction" Multiplicity="1" />
+          <End Type="SSAMModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceLineFunction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ServiceLineFunctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamRoles_Roles">
+          <End Type="SSAMModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SSAMModel.TeamRole" Role="TeamRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SSAMModelStoreContainer" CdmEntityContainer="SSAMEntities">
+          <EntitySetMapping Name="TblEmployeeTeams">
+            <EntityTypeMapping TypeName="SSAMModel.TblEmployeeTeam">
+              <MappingFragment StoreEntitySet="TblEmployeeTeams">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="SSAMModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RecordInsertDateTime" ColumnName="RecordInsertDateTime" />
+                <ScalarProperty Name="DMLType" ColumnName="DMLType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceLineFunctionID" ColumnName="ServiceLineFunctionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SSAMModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RecordInsertDateTime" ColumnName="RecordInsertDateTime" />
+                <ScalarProperty Name="DMLType" ColumnName="DMLType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceLineFunctions">
+            <EntityTypeMapping TypeName="SSAMModel.ServiceLineFunction">
+              <MappingFragment StoreEntitySet="ServiceLineFunction">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RecordInsertDateTime" ColumnName="RecordInsertDateTime" />
+                <ScalarProperty Name="DMLType" ColumnName="DMLType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamRoles">
+            <EntityTypeMapping TypeName="SSAMModel.TeamRole">
+              <MappingFragment StoreEntitySet="TeamRoles">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RecordInsertDateTime" ColumnName="RecordInsertDateTime" />
+                <ScalarProperty Name="DMLType" ColumnName="DMLType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="EmployeeTeamID" ColumnName="EmployeeTeamID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

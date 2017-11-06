@@ -1,0 +1,12 @@
+  
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Client Services','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Corporate Accounting','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Financial Management','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Human Resources','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Information Management','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Information Technology','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Insurance','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Legal','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Treasury','INSERT',GETDATE(),'trimontrea\akudala') 
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('CEO','INSERT',GETDATE(),'trimontrea\akudala')
+    INSERT into [SSAM].[TT].[ServiceLineFunction](Name,DMLType,RecordInsertDateTime,Username)Values('Other Corporate Categories','INSERT',GETDATE(),'trimontrea\akudala') 
