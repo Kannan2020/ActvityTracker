@@ -213,15 +213,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\1.CREATE-TTschema and TBlServiceLine.sql" />
-    <Content Include="App_Data\2.CREATE-TT.TblActivity.sql" />
-    <Content Include="App_Data\3.InsertServiceLineData.sql" />
-    <Content Include="App_Data\4. InsertActivitydata.sql" />
-    <Content Include="App_Data\5.CREATE-TT.Roles.sql" />
-    <Content Include="App_Data\6.CREATE-TT.TeamRoles.sql" />
-    <Content Include="App_Data\7.CREATE-Tblemployeeteam-kanna.sql" />
-    <Content Include="App_Data\7.Insert-TT.Roles.sql" />
-    <Content Include="App_Data\8.Insert-TT.TeamRoles.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -268,7 +259,9 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
